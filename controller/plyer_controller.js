@@ -11,7 +11,12 @@ const getPlyer = async (req, res) => {
     res.json(plyer.rows)
 };
 
+const updateScore = async (req, res) => {
+    const { id, score } = req.body;
+    const updatedPlyer = await db.query(`UPDATE plyer set score = $1 where id = $2 RETURNING *`, [score, id]);
+    res.json(updatedPlyer.rows[0]);
+    console.log(updatedPlyer)
+};
 
 
-
-export default {createPlyer, getPlyer}
+export default {createPlyer, getPlyer, updateScore}
