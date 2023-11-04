@@ -1,7 +1,11 @@
 import express from 'express';
 import plyerRouter from './routes/plyer_routes.js';
 import cors from 'cors';
-const PORT = process.env.PORT || 5000;
+
+import dotenv from 'dotenv'
+dotenv.config();
+
+const PORT = process.env.PORT;
 
 const app = express();
 app.use(express.json())
