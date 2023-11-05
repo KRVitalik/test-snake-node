@@ -25,7 +25,12 @@ const getPlyer = async (req, res) => {
 
 const updateScore = async (req, res) => {
     const { id, score } = req.body;
+
     const updatedPlyer = await db.query(`UPDATE plyer set score = $1 where id = $2 RETURNING *`, [score, id]);
+    if (updatedPlyer.rows.length === 0) {
+        throw Errors(404, 'Not found')
+    }
+
     res.json(updatedPlyer.rows[0]);
 };
 
